@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FreeCell</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js"></script>
+</head>
+<body>
+<div class="board">
+    <div class="row">
+        <div class="stack free" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack free" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack free" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack free" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack ace" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div class="inner">
+                <div class="title"><span class="value">A</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack ace" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div class="inner">
+                <div class="title"><span class="value">A</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack ace" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div class="inner">
+                <div class="title"><span class="value">A</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack ace" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div class="inner">
+                <div class="title"><span class="value">A</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+    </div>
+    <div class="space"></div>
+    <div class="row">
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div id="A♥" class="card red" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">A</span><span class="suite">♥</span></div>
+                <div class="inner">
+                    <div class="name">Ace</div>
+                </div>
+                <div class="title bottom"><span class="value">A</span><span class="suite">♥</span></div>
+            </div>
+            <div id="2♠" class="card black" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">2</span><span class="suite">♠</span></div>
+                <div class="inner">
+                    <div class="name">Two</div>
+                </div>
+                <div class="title bottom"><span class="value">2</span><span class="suite">♠</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div id="2♥" class="card red" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">2</span><span class="suite">♥</span></div>
+                <div class="inner">
+                    <div class="name">Two</div>
+                </div>
+                <div class="title bottom"><span class="value">2</span><span class="suite">♥</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div id="Q♥" class="card red" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">Q</span><span class="suite">♥</span></div>
+                <div class="inner face">
+                    <div class="face">👸</div>
+                    <div class="name">Queen</div>
+                </div>
+                <div class="title bottom"><span class="value">Q</span><span class="suite">♥</span></div>
+            </div>
+            <div id="K♠" class="card" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">K</span><span class="suite">♠</span></div>
+                <div class="inner face">
+                    <div class="face">🤴</div>
+                    <div class="name">King</div>
+                </div>
+                <div class="title bottom"><span class="value">K</span><span class="suite">♠</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+            <div id="J♣" class="card black" draggable="true" ondragstart="dragStart(event)">
+                <div class="title top"><span class="value">J</span><span class="suite">♣</span></div>
+                <div class="inner face">
+                    <div class="face">💂</div>
+                    <div class="name">Jack</div>
+                </div>
+                <div class="title bottom"><span class="value">J</span><span class="suite">♣</span></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+        <div class="stack pile" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondrop="drop(event)"></div>
+        <div class="space"></div>
+    </div>
+    <script>
+        resetBoard();
+    </script>
+    <div class="space grow"></div>
+    <div class="copyright">© 2021 Will Pease</div>
+</div>
+</body>
+</html>

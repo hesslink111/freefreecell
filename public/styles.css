@@ -1,0 +1,186 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+.board {
+  background-color: green;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.board > .row {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+.stack {
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: 120px;
+  min-height: 168px;
+  background-color: rgba(255, 255, 255, 0.125);
+  position: relative;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stack > .card {
+  margin-top: -1px;
+  margin-left: -1px;
+}
+
+.stack.highlight {
+  filter: brightness(75%);
+}
+
+.stack > .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+}
+
+.stack > .inner > .title {
+  font-family: "Courier New";
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+}
+
+.stack.free > .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stack.ace > .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stack.pile > .card {
+  margin-bottom: -140px;
+}
+
+.stack.pile > .card:last-child {
+  margin-bottom: 0;
+}
+
+.card {
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  width: 120px;
+  height: 168px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier New";
+  font-weight: bold;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+  transform: translateZ(0);
+}
+
+.card.black {
+  color: black;
+}
+
+.card.red {
+  color: red;
+}
+
+.card.highlight {
+  background-color: lightgrey;
+}
+
+.card .title {
+    height: 30px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.card .title.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card .title.bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform:rotate(180deg);
+}
+
+.card > .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card > .inner.face {
+  border-radius: 2px;
+  border: 1px solid grey;
+  width: 75px;
+  height: 108px;
+}
+
+.card > .inner > .face {
+  font-size: 60px;
+}
+
+.card > .inner > .name {
+  font-size: 20px;
+}
+
+.space {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.space.grow {
+  flex-grow: 1;
+}
+
+.copyright {
+  color: white;
+  font-family: "Courier New";
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.not-found {
+  color: white;
+  font-family: "Courier New";
+  font-weight: bold;
+  font-size: 16px;
+  align-self: center;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}

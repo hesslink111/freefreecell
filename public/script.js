@@ -100,7 +100,7 @@ function dragEventSourceCard(event) {
 
 function cardCanMoveToStack(card, stack) {
   const sourceStack = cardSourceStack(card);
-  if(!stackCanDropCard(sourceStack)) {
+  if(!stackCanDropCard(sourceStack, card)) {
     return false;
   }
   if(stackIsAceStack(stack)) {
@@ -140,7 +140,11 @@ function stackCards(stack) {
   return stack.querySelectorAll(".card");
 }
 
-function stackCanDropCard(stack) {
+function stackCanDropCard(stack, card) {
+  const cardsInStack = stackCards(stack);
+  if(card !== cardsInStack[cardsInStack.length - 1]) {
+    return false;
+  }
   return !stackIsAceStack(stack);
 }
 

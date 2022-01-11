@@ -62,8 +62,10 @@ function incrementDragCount(stack, increment) {
 }
 
 function resetDragCount(stack) {
-  dragCounts.set(stack, 0);
-  updateHighlight(stack);
+  dragCounts.clear();
+  for(stack of document.querySelectorAll(".stack")) {
+    updateHighlight(stack);
+  }
 }
 
 function updateHighlight(stack) {
@@ -86,7 +88,7 @@ function drop(event) {
   resetDragCount(stack);
   const canAccept = cardCanMoveToStack(card, stack);
   if(canAccept) {
-    stack.appendChild(card);
+    moveCardToStack(card, stack);
   }
 }
 
@@ -96,6 +98,19 @@ function dragEventTargetStack(event) {
 
 function dragEventSourceCard(event) {
   return document.getElementById(event.dataTransfer.getData("freecell/card-id"));
+}
+
+function tryMoveCard(event) {
+  const card = event.target.closest(".card");
+  const aceStacks = document.querySelectorAll(".stack.ace");
+  const pileStacks = document.querySelectorAll(".stack.pile");
+  const freeStacks = document.querySelectorAll(".stack.free");
+  for(const stack of [...aceStacks, ...pileStacks, ...freeStacks]) {
+    if(cardCanMoveToStack(card, stack)) {
+      moveCardToStack(card, stack);
+      return;
+    }
+  }
 }
 
 function cardCanMoveToStack(card, stack) {
@@ -122,6 +137,26 @@ function cardCanMoveToStack(card, stack) {
     return (cardValue(card) === (cardValue(topCard) - 1)) && cardColor(card) !== cardColor(topCard);
   }
   return false;
+}
+
+function moveCardToStack(card, stack) {
+  stack.appendChild(card);
+  if(stackIsAceStack(stack) && gameWon()) {
+    const wins = parseInt(localStorage.getItem("wins") ?? 0) + 1;
+    localStorage.setItem("wins", wins);
+    updateStats();
+  }
+}
+
+function gameWon() {
+  const stacks = document.querySelectorAll(".stack.ace");
+  for(stack of stacks) {
+    const cardsInStack = stackCards(stack);
+    if(cardsInStack.length !== 13) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function stackIsAceStack(stack) {
@@ -200,6 +235,11 @@ function dealCards() {
     stacks[nextStack].appendChild(card);
     nextStack = (nextStack + 1) % 8;
   }
+
+  const attempts = parseInt(localStorage.getItem("attempts") ?? 0) + 1;
+  localStorage.setItem("attempts", attempts);
+
+  updateStats();
 }
 
 function makeCard(value, suite) {
@@ -209,6 +249,7 @@ function makeCard(value, suite) {
   card.classList.add(cardColors[suite]);
   card.setAttribute("draggable", true);
   card.ondragstart = dragStart;
+  card.ondblclick = tryMoveCard;
 
   const titleTop = document.createElement("div");
   titleTop.classList.add("title");
@@ -244,4 +285,13 @@ function makeCard(value, suite) {
   card.appendChild(inner);
 
   return card;
+}
+
+function updateStats() {
+  const attempts = parseInt(localStorage.getItem("attempts") ?? 0);
+  const wins = parseInt(localStorage.getItem("wins") ?? 0);
+
+  document.querySelector(".stat.attempts").textContent = `Attempts: ${attempts}`;
+  document.querySelector(".stat.wins").textContent = `Wins: ${wins}`;
+  document.querySelector(".stat.rate").textContent = `Rate: ${Math.round(100 * (wins / attempts))}%`;
 }
